@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:streams/chapters/streamController.dart';
+import 'package:streams/chapters/streams.dart';
 
 import 'custom_widget/custom_button.dart';
 
@@ -27,10 +28,21 @@ class _MainPageState extends State<MainPage> {
               child: Column(
                 children: [
                   CustomTextButton(
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => StreamsPage()));
+                    },
+                    title: "Streams",
+                    textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  CustomTextButton(
                       onPressed: (){
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => StreamControllerPage()));
                       },
-                      title: "StreamBuilder",
+                      title: "StreamController",
                       textStyle: TextStyle(
                         fontSize: 20,
                         color: Colors.white
