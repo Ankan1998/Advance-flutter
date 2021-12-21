@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:streams/custom_widget/custom_button.dart';
+import 'package:streams/themes/text_style.dart';
 
 class StreamControllerClass{
   StreamController<int> _controller = StreamController<int>.broadcast();
@@ -43,10 +44,16 @@ class _StreamControllerPageState extends State<StreamControllerPage> {
                       stream: _ctrlcls._controller.stream,
                       builder: (BuildContext context,AsyncSnapshot<int> snapshot){
                         if(!snapshot.hasData){
-                          return Text("Has No data");
+                          return Text(
+                              "Has No data",
+                            style: TextStyles.largeTitle,
+                          );
                         }
                         // Getting number from the stream as comes from stream
-                        return Text(snapshot.data.toString());
+                        return Text(
+                            snapshot.data.toString(),
+                          style: TextStyles.largeTitle,
+                        );
 
                       }
                   ),

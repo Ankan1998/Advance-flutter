@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:streams/custom_widget/custom_button.dart';
+import 'package:streams/themes/text_style.dart';
 
 class Streams{
   Stream<int> countStream() async* {
@@ -24,7 +25,7 @@ class _StreamsPageState extends State<StreamsPage> {
 
   Streams strs = Streams();
   StreamSubscription strsub;
-
+  int stream_val;
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +46,17 @@ class _StreamsPageState extends State<StreamsPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  Text(
+                      stream_val.toString(),
+                      style: TextStyles.largeTitle,
+                  ),
+                  SizedBox(height: 10,),
                   CustomTextButton(
                     onPressed: (){
                       strsub = strs.countStream().listen((event) {
-                        print(event);
+                        setState(() {
+                          stream_val = event;
+                        });
                       });
                     },
                     title: "Start Streams",
