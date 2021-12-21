@@ -35,8 +35,11 @@ class _StreamsPageState extends State<StreamsPage> {
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () {
-                strsub.cancel();
                 Navigator.of(context).pop();
+                if(strsub!=null){
+                  strsub.cancel();
+                }
+
               },
             ),
             title: Text("Streams"),
