@@ -5,22 +5,30 @@ import 'package:flutter/material.dart';
 import 'package:streams/custom_widget/custom_button.dart';
 import 'package:streams/themes/text_style.dart';
 
-class StreamControllerClass{
+class XStreamTransformer{
+
   StreamController<int> _controller = StreamController<int>.broadcast();
   Stream<int> get outpipe => _controller.stream;
   Sink<int> get inpipe => _controller.sink;
+
+  StreamTransformer xstTrans = StreamTransformer<int,int>.fromHandlers(
+    handleData: (data, sink){
+      sink.add(data*10);
+    }
+  );
 }
 
-class StreamControllerPage extends StatefulWidget {
-  const StreamControllerPage({Key key}) : super(key: key);
+
+class StreamTransformerPage extends StatefulWidget {
+  const StreamTransformerPage({Key key}) : super(key: key);
 
   @override
-  _StreamControllerPageState createState() => _StreamControllerPageState();
+  _StreamTransformerPageState createState() => _StreamTransformerPageState();
 }
 
-class _StreamControllerPageState extends State<StreamControllerPage> {
+class _StreamTransformerPageState extends State<StreamTransformerPage> {
 
-  StreamControllerClass _ctrlcls = StreamControllerClass();
+  XStreamTransformer _xStreamTransformer = XStreamTransformer();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +41,7 @@ class _StreamControllerPageState extends State<StreamControllerPage> {
                 Navigator.of(context).pop();
               },
             ),
-            title: Text("Stream Builder"),
+            title: Text("Stream Transformer"),
             centerTitle: true,
           ),
           body:Center(
@@ -41,33 +49,34 @@ class _StreamControllerPageState extends State<StreamControllerPage> {
               child: Column(
                 children: [
                   StreamBuilder<int>(
-                      stream: _ctrlcls.outpipe,
+                    // stream is transformed with StreamTransformer
+                      stream: _xStreamTransformer.outpipe.transform(_xStreamTransformer.xstTrans),
                       builder: (BuildContext context,AsyncSnapshot<int> snapshot){
                         if(!snapshot.hasData){
                           return Text(
-                              "Has No data",
+                            "Has No data",
                             style: TextStyles.largeTitle,
                           );
                         }
                         // Getting number from the stream as comes from stream
                         return Text(
-                            snapshot.data.toString(),
+                          snapshot.data.toString(),
                           style: TextStyles.largeTitle,
                         );
 
                       }
                   ),
                   CustomTextButton(
-                      onPressed: ()async {
-                        // It is sending number one by one to sink at a delay of 1 sec
-                        for(int i=0;i<10;i++){
-                          if(!_ctrlcls._controller.isClosed) {
-                            _ctrlcls.inpipe.add(i);
-                            await Future.delayed(Duration(seconds: 1));
-                          }
+                    onPressed: ()async {
+                      // It is sending number one by one to sink at a delay of 1 sec
+                      for(int i=0;i<10;i++){
+                        if(!_xStreamTransformer._controller.isClosed) {
+                          _xStreamTransformer.inpipe.add(i);
+                          await Future.delayed(Duration(seconds: 1));
                         }
-                      },
-                    title: "Stream-Builder",
+                      }
+                    },
+                    title: "Stream-Transformer",
                     textStyle: TextStyle(
                         fontSize: 20,
                         color: Colors.white
@@ -83,7 +92,7 @@ class _StreamControllerPageState extends State<StreamControllerPage> {
 
   @override
   void dispose(){
-    _ctrlcls._controller.close();
+    _xStreamTransformer._controller.close();
     super.dispose();
   }
 }
