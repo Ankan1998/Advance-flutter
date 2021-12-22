@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:streams/chapters/XBloc.dart';
 import 'package:streams/chapters/streamController.dart';
 import 'package:streams/chapters/streams.dart';
 
@@ -67,6 +68,17 @@ class _MainPageState extends State<MainPage> {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => CubitPage()));
                     },
                     title: "Cubit",
+                    textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  CustomTextButton(
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocPage()));
+                    },
+                    title: "Bloc",
                     textStyle: TextStyle(
                         fontSize: 20,
                         color: Colors.white
