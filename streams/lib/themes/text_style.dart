@@ -19,4 +19,9 @@ class TextStyles{
       color: Colors.grey[100]
   );
 
+  static TextStyle button2 = TextStyle(
+  fontSize: 20,
+  color: Colors.white
+  );
+
 }
