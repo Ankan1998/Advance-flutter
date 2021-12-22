@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:streams/chapters/streamController.dart';
 import 'package:streams/chapters/streams.dart';
 
+import 'chapters/XCubit.dart';
+import 'chapters/streamTransformer.dart';
 import 'custom_widget/custom_button.dart';
 
 class MainPage extends StatefulWidget {
@@ -42,11 +44,33 @@ class _MainPageState extends State<MainPage> {
                       onPressed: (){
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => StreamControllerPage()));
                       },
-                      title: "StreamController",
+                      title: "Stream Controller",
                       textStyle: TextStyle(
                         fontSize: 20,
                         color: Colors.white
                       ),
+                  ),
+                  SizedBox(height: 10,),
+                  CustomTextButton(
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => StreamTransformerPage()));
+                    },
+                    title: "Stream Transformer",
+                    textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  CustomTextButton(
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => CubitPage()));
+                    },
+                    title: "Cubit",
+                    textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white
+                    ),
                   )
                 ],
               ),
