@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 // Repository to fetch Data
 class Fakerepo {
@@ -43,6 +43,52 @@ class FakeModel {
     return data;
   }
 }
+
+// Cubit State Class
+abstract class FakeState extends Equatable {
+  const FakeState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class FakeInitial extends FakeState {
+  const FakeInitial();
+}
+
+class FakeLoading extends FakeState {
+  const FakeLoading();
+}
+
+class FakeLoaded extends FakeState {
+  final FakeModel fakemodel;
+
+  const FakeLoaded(this.fakemodel);
+}
+
+class FakeError extends FakeState {
+  final String msg;
+
+  const FakeError(this.msg);
+}
+
+// Cubit Class
+class FakeCubit extends Cubit<FakeState> {
+  final Fakerepo fr;
+
+  FakeCubit(this.fr) : super(FakeInitial());
+
+  Future<void> getFake() async {
+    try {
+      emit(FakeLoading());
+      var data = await fr.fetchData();
+      emit(FakeLoaded(data));
+    } catch (e) {
+      emit(FakeError("Something Went Wrong"));
+    }
+  }
+}
+
 
 
 
