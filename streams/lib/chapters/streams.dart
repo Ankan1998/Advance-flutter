@@ -73,6 +73,7 @@ class _StreamsPageState extends State<StreamsPage> {
                     onPressed: (){
                       strsub.cancel();
                     },
+                    isDisabled: strsub==null?true:false,
                     title: "Cancel streams",
                     textStyle: TextStyle(
                         fontSize: 20,
