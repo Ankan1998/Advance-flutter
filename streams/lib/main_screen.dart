@@ -4,6 +4,7 @@ import 'package:streams/chapters/XBloc.dart';
 import 'package:streams/chapters/streamController.dart';
 import 'package:streams/chapters/streams.dart';
 
+import 'chapters/BlocStreamPartial.dart';
 import 'chapters/XCubit.dart';
 import 'chapters/streamTransformer.dart';
 import 'custom_widget/custom_button.dart';
@@ -79,6 +80,17 @@ class _MainPageState extends State<MainPage> {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocPage()));
                     },
                     title: "Bloc",
+                    textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  CustomTextButton(
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => BlocStreamPartialPage()));
+                    },
+                    title: "Bloc Stream Partial",
                     textStyle: TextStyle(
                         fontSize: 20,
                         color: Colors.white
