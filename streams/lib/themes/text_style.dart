@@ -9,7 +9,11 @@ class TextStyles{
       fontFamily: GoogleFonts.poppins().fontFamily,
       fontWeight: FontWeight.w100,
       letterSpacing: 2.0,
-      fontSize: 36.0
+      fontSize: 18.0
+  );
+
+  static TextStyle largeTitle2 = largeTitle.copyWith(
+    fontWeight: FontWeight.w700
   );
 
   static TextStyle button1 = TextStyle(

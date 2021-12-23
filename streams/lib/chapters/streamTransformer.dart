@@ -48,23 +48,61 @@ class _StreamTransformerPageState extends State<StreamTransformerPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  StreamBuilder<int>(
-                    // stream is transformed with StreamTransformer
-                      stream: _xStreamTransformer.outpipe.transform(_xStreamTransformer.xstTrans),
-                      builder: (BuildContext context,AsyncSnapshot<int> snapshot){
-                        if(!snapshot.hasData){
-                          return Text(
-                            "Has No data",
-                            style: TextStyles.largeTitle,
-                          );
-                        }
-                        // Getting number from the stream as comes from stream
-                        return Text(
-                          snapshot.data.toString(),
-                          style: TextStyles.largeTitle,
-                        );
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Original",
+                        style: TextStyles.largeTitle2,
+                      ),
+                      SizedBox(width: 10,),
+                      StreamBuilder<int>(
+                        // stream is transformed with StreamTransformer
+                          stream: _xStreamTransformer.outpipe,
+                          builder: (BuildContext context,AsyncSnapshot<int> snapshot){
+                            if(!snapshot.hasData){
+                              return Text(
+                                "Has No data",
+                                style: TextStyles.largeTitle,
+                              );
+                            }
+                            // Getting number from the stream as comes from stream
+                            return Text(
+                              snapshot.data.toString(),
+                              style: TextStyles.largeTitle,
+                            );
 
-                      }
+                          }
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                          "Transformed",
+                        style: TextStyles.largeTitle2,
+                      ),
+                      SizedBox(width: 10,),
+                      StreamBuilder<int>(
+                        // stream is transformed with StreamTransformer
+                          stream: _xStreamTransformer.outpipe.transform(_xStreamTransformer.xstTrans),
+                          builder: (BuildContext context,AsyncSnapshot<int> snapshot){
+                            if(!snapshot.hasData){
+                              return Text(
+                                "Has No data",
+                                style: TextStyles.largeTitle,
+                              );
+                            }
+                            // Getting number from the stream as comes from stream
+                            return Text(
+                              snapshot.data.toString(),
+                              style: TextStyles.largeTitle,
+                            );
+
+                          }
+                      ),
+                    ],
                   ),
                   CustomTextButton(
                     onPressed: ()async {
