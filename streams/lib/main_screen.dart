@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:streams/chapters/BlocStreamComplete.dart';
 import 'package:streams/chapters/XBloc.dart';
 import 'package:streams/chapters/streamController.dart';
 import 'package:streams/chapters/streams.dart';
 
 import 'chapters/BlocStreamPartial.dart';
+import 'chapters/FutureBuilder.dart';
 import 'chapters/XCubit.dart';
 import 'chapters/streamTransformer.dart';
 import 'custom_widget/custom_button.dart';
@@ -31,6 +33,17 @@ class _MainPageState extends State<MainPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  CustomTextButton(
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => FutureBuilderPage()));
+                    },
+                    title: "Future Builder",
+                    textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white
+                    ),
+                  ),
+                  SizedBox(height: 10,),
                   CustomTextButton(
                     onPressed: (){
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => StreamsPage()));
@@ -95,7 +108,7 @@ class _MainPageState extends State<MainPage> {
                         fontSize: 20,
                         color: Colors.white
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
