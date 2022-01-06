@@ -125,7 +125,7 @@ class _FutureBuilderPageState extends State<FutureBuilderPage> {
                         fr.fetchData(myController.text);
                       });
                     },
-                    title: "Stream-Builder",
+                    title: "Future-Builder",
                     textStyle: TextStyle(
                         fontSize: 20,
                         color: Colors.white
